@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Ship : MonoBehaviour {
+    public static string tagPlayer = "Player", tagEnemy = "Enemy";
+
     [SerializeField] protected Missile prefabMissile;
     [SerializeField] protected float speed;
     /// <summary>
@@ -30,10 +32,32 @@ public abstract class Ship : MonoBehaviour {
     protected abstract void Shoot();
 
     protected void SpawnMissile() {
-        Instantiate(prefabMissile, transform.position + shootOffset, transform.rotation);
+        Missile missile = Instantiate(prefabMissile, transform.position + shootOffset, transform.rotation);
+        missile.tag = tag;
     }
 
     protected void Reload() {
         canFire = true;
+    }
+
+    protected virtual void OnHit() {
+        GameManager.Instance.AddLife(-1);
+        if (GameManager.Instance.life < 1) {
+            Die();
+        }
+    }
+    protected virtual void Die() {
+        // play explosion
+        GameManager.Instance.LoseGame();
+        Destroy(gameObject);
+    }
+
+    protected virtual void OnTriggerEnter2D(Collider2D collision) {
+        if (collision.tag == tagEnemy) {
+            OnHit();
+            if (collision.TryGetComponent<Missile>(out Missile missile)) {
+                Destroy(collision.gameObject);
+            }
+        }
     }
 }
