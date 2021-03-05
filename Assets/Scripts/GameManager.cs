@@ -6,18 +6,15 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour {
     public static GameManager Instance;
 
-
     public bool IsPaused
     {
         get { return Time.timeScale <= 0f; }
-        set { Time.timeScale = value ? 0f : 1f; }
+        set { Time.timeScale = gamePlaying ? (value ? 0f : 1f) : Time.timeScale; }
     }
     [HideInInspector] public GameObject poolMissile;
     public int life = 0;
-
-    [SerializeField] GameObject panelPause;
-    [SerializeField] GameObject panelGameOver;
-    [SerializeField] Text txtLife;
+    public int score = 0;
+    bool gamePlaying = false;
 
     private void Start() {
         if (Instance == null) {
@@ -29,9 +26,10 @@ public class GameManager : MonoBehaviour {
         poolMissile = new GameObject("MissilePool");
         poolMissile.transform.SetParent(transform);
 
-        life = 0;
         AddLife(1);
+        AddScore(0);
 
+        gamePlaying = true;
         IsPaused = false;
     }
 
@@ -39,7 +37,7 @@ public class GameManager : MonoBehaviour {
     {
         if(life <= 0) {
             IsPaused = true;
-            panelGameOver.SetActive(true);
+            MenuManager.Instance.ShowPanelGameOver(true);
         } else {
             if(Input.GetKeyDown(KeyCode.Escape)) {
                 IsPaused = !IsPaused;
@@ -57,16 +55,29 @@ public class GameManager : MonoBehaviour {
 
     void TogglePanelPause(bool pause)
     {
-        panelPause.SetActive(pause);
+        MenuManager.Instance.ShowPanelPause(pause);
     }
 
-    void AddLife(int increment) {
+    public void LoseGame() {
+        MenuManager.Instance.ShowPanelGameOver(true);
+        IsPaused = true;
+        gamePlaying = false;
+    }
+
+    public void AddLife(int increment) {
         life += increment;
+        if (life < 0) { life = 0; }
         if(life > 99) {
-            txtLife.text = "Score : 99+";
+            MenuManager.Instance.ChangeLifeText("Lives : 99+");
         } else {
-            txtLife.text = "Score : " + life;
+            MenuManager.Instance.ChangeLifeText("Lives : " + life);
         }
+    }
+
+    public void AddScore(int increment) {
+        score += increment;
+        if (score < 0) { score = 0; }
+        MenuManager.Instance.ChangeScoreText("Score: " + score);
     }
 
     public static Vector3 GetScreenBounds() {
