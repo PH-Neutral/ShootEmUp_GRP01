@@ -18,8 +18,8 @@ public abstract class Ship : MonoBehaviour {
 
     private void Start() {
         screenbounds = GameManager.GetScreenBounds();
-        objectWidth = GetComponent<SpriteRenderer>().bounds.extents.x;
-        objectHeight = GetComponent<SpriteRenderer>().bounds.extents.y;
+        objectWidth = GetComponentInChildren<SpriteRenderer>().bounds.extents.x;
+        objectHeight = GetComponentInChildren<SpriteRenderer>().bounds.extents.y;
     }
 
     private void Update() {
@@ -33,7 +33,6 @@ public abstract class Ship : MonoBehaviour {
 
     protected void SpawnMissile() {
         Missile missile = Instantiate(prefabMissile, transform.position + shootOffset, transform.rotation);
-        missile.tag = tag;
     }
 
     protected void Reload() {
@@ -41,23 +40,7 @@ public abstract class Ship : MonoBehaviour {
     }
 
     protected virtual void OnHit() {
-        GameManager.Instance.AddLife(-1);
-        if (GameManager.Instance.life < 1) {
-            Die();
-        }
     }
     protected virtual void Die() {
-        // play explosion
-        GameManager.Instance.LoseGame();
-        Destroy(gameObject);
-    }
-
-    protected virtual void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.tag == tagEnemy) {
-            OnHit();
-            if (collision.TryGetComponent<Missile>(out Missile missile)) {
-                Destroy(collision.gameObject);
-            }
-        }
     }
 }

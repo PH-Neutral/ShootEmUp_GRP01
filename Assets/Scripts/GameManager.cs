@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour {
     public int life = 0;
     public int score = 0;
     bool gamePlaying = false;
+    [SerializeField] int lifeUpScore;
+    int lifeUpPalier;
 
     private void Start() {
         if (Instance == null) {
@@ -26,9 +28,11 @@ public class GameManager : MonoBehaviour {
         poolMissile = new GameObject("MissilePool");
         poolMissile.transform.SetParent(transform);
 
-        AddLife(1);
-        AddScore(0);
+        lifeUpPalier = lifeUpScore;
 
+        AddLife(0);
+        AddScore(0);
+        
         gamePlaying = true;
         IsPaused = false;
     }
@@ -78,6 +82,11 @@ public class GameManager : MonoBehaviour {
         score += increment;
         if (score < 0) { score = 0; }
         MenuManager.Instance.ChangeScoreText("Score: " + score);
+        if (score >= lifeUpPalier)
+        {
+            AddLife(15);
+            lifeUpPalier += lifeUpScore;
+        }
     }
 
     public static Vector3 GetScreenBounds() {

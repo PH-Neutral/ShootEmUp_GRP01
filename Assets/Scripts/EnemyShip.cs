@@ -34,7 +34,7 @@ public class EnemyShip : Ship {
     }
 
 
-    protected override void OnTriggerEnter2D(Collider2D collision) {
+    void OnTriggerEnter2D(Collider2D collision) {
         if(collision.tag == tagPlayer) {
             OnHit();
             if(collision.TryGetComponent<Missile>(out Missile missile)) {

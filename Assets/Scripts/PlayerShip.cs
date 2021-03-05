@@ -22,4 +22,32 @@ public class PlayerShip : Ship {
             canFire = false;
         }
     }
+
+    protected override void OnHit()
+    {
+        GameManager.Instance.AddLife(-1);
+        if (GameManager.Instance.life < 1)
+        {
+            Die();
+        }
+    }
+
+    protected override void Die()
+    {
+        // play explosion
+        GameManager.Instance.LoseGame();
+        Destroy(gameObject);
+    }
+
+     void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == tagEnemy)
+        {
+            OnHit();
+            if (collision.TryGetComponent<Missile>(out Missile missile))
+            {
+                Destroy(collision.gameObject);
+            }
+        }
+    }
 }
