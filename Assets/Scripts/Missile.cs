@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class Missile : MonoBehaviour {
     public Vector3 moveVector;
+    public SpriteRenderer sr;
     Vector3 boundsMin, boundsMax;
 
     private void Awake() {
+        sr = GetComponent<SpriteRenderer>();
         transform.SetParent(GameManager.Instance.poolMissile.transform);
     }
 

@@ -362,6 +362,27 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 945738150643011559, guid: 258b0ceda3fff6442a5d85930188eb91,
+        type: 3}
+      propertyPath: hp
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 945738150643011559, guid: 258b0ceda3fff6442a5d85930188eb91,
+        type: 3}
+      propertyPath: missileSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b8904a9aa2721a149b556da973ea24bd,
+        type: 3}
+    - target: {fileID: 945738150643011559, guid: 258b0ceda3fff6442a5d85930188eb91,
+        type: 3}
+      propertyPath: speed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 945738150643011559, guid: 258b0ceda3fff6442a5d85930188eb91,
+        type: 3}
+      propertyPath: fireRate
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 258b0ceda3fff6442a5d85930188eb91, type: 3}
 --- !u!1 &450349891
@@ -1016,9 +1037,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolMissile: {fileID: 0}
-  life: 5
+  life: 20
   score: 0
-  lifeUpScore: 50
+  lifeUpScore: 200
 --- !u!4 &995743754
 Transform:
   m_ObjectHideFlags: 0
@@ -1040,6 +1061,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5367489441883375096, guid: e924a36fefd82ca47a24b279cc838fca,
+        type: 3}
+      propertyPath: hp
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5367489441883375096, guid: e924a36fefd82ca47a24b279cc838fca,
+        type: 3}
+      propertyPath: missileSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c1f04e5336f72db4899cc5995e1d8d3d,
+        type: 3}
+    - target: {fileID: 5367489441883375096, guid: e924a36fefd82ca47a24b279cc838fca,
+        type: 3}
+      propertyPath: flipSprite
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5508875160802907220, guid: e924a36fefd82ca47a24b279cc838fca,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1930,6 +1967,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1151956451739052092, guid: d7b9b4a2b3a16e84896ca4a16cf58134,
+        type: 3}
+      propertyPath: missileSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 7cc920b1ea0cf814fa1bf5f44cc7b3c9,
+        type: 3}
     - target: {fileID: 1151956451739052094, guid: d7b9b4a2b3a16e84896ca4a16cf58134,
         type: 3}
       propertyPath: m_Name
@@ -1944,6 +1987,27 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5367489441883375096, guid: 3cd5ff58a2e95d343bb195b766bd98b7,
+        type: 3}
+      propertyPath: hp
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5367489441883375096, guid: 3cd5ff58a2e95d343bb195b766bd98b7,
+        type: 3}
+      propertyPath: missileSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 27c55860fd4a85148a5a74fedb39c61a,
+        type: 3}
+    - target: {fileID: 5367489441883375096, guid: 3cd5ff58a2e95d343bb195b766bd98b7,
+        type: 3}
+      propertyPath: flipSprite
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5367489441883375096, guid: 3cd5ff58a2e95d343bb195b766bd98b7,
+        type: 3}
+      propertyPath: fireRate
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5508875160802907220, guid: 3cd5ff58a2e95d343bb195b766bd98b7,
         type: 3}
       propertyPath: m_LocalPosition.x
