@@ -9,6 +9,7 @@ public class MenuManager : MonoBehaviour {
 
     [SerializeField] GameObject panelPause;
     [SerializeField] GameObject panelGameOver;
+    [SerializeField] GameObject panelVictory;
     [SerializeField] Text txtLife;
     [SerializeField] Text txtScore;
 
@@ -26,6 +27,10 @@ public class MenuManager : MonoBehaviour {
 
     public void ShowPanelGameOver(bool show) {
         panelGameOver.SetActive(show);
+    }
+
+    public void ShowPanelVictory(bool show) {
+        panelVictory.SetActive(show);
     }
 
     public void ChangeLifeText(string newText) {

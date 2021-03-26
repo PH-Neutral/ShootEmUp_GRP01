@@ -814,6 +814,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panelPause: {fileID: 1737919927}
   panelGameOver: {fileID: 1948736398}
+  panelVictory: {fileID: 0}
   txtLife: {fileID: 2009436880}
   txtScore: {fileID: 757259722}
 --- !u!4 &856837222
@@ -1024,6 +1025,8 @@ MonoBehaviour:
   life: 20
   score: 0
   lifeUpScore: 200
+  bossSpawnPalier: 20
+  spawner: {fileID: 1248600365}
 --- !u!4 &995743754
 Transform:
   m_ObjectHideFlags: 0
@@ -1249,7 +1252,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2eae6d30690b6d4b908ffc78d05c55a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnBossNext: 0
   enemyPool: {fileID: 1695104039}
+  prefabBoss: {fileID: 0}
   prefabEnemies:
   - {fileID: 945738150643011559, guid: 258b0ceda3fff6442a5d85930188eb91, type: 3}
   - {fileID: 5367489441883375096, guid: 3cd5ff58a2e95d343bb195b766bd98b7, type: 3}

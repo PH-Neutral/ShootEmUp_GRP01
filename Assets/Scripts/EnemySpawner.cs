@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [SerializeField] Transform enemyPool;
-    //[SerializeField] Boss prefabBoss;
+    public bool spawnBossNext = false;
+
+    [SerializeField] Transform enemyPool = null;
+    [SerializeField] Boss prefabBoss = null;
     [SerializeField] EnemyShip[] prefabEnemies = null;
     [SerializeField] float[] weightEnemies = null;
     [SerializeField] float spawnRate = 0.8f;
@@ -29,9 +31,15 @@ public class EnemySpawner : MonoBehaviour
 
     private void Update() {
         if(!canSpawn) return;
+        if (spawnBossNext) {
+            if (enemyPool.childCount < 1) {
+                SpawnBoss();
+            }
+            return;
+        }
         spawnTimer -= Time.deltaTime;
         if (spawnTimer <= 0) {
-            Debug.Log("Time's up!");
+            //Debug.Log("Time's up!");
             if (SpawnEnemy()) {
                 spawnTimer = 1f / spawnRate;
             }
@@ -44,7 +52,7 @@ public class EnemySpawner : MonoBehaviour
             ChooseNewEnemy();
             return false;
         }
-        EnemyShip enemy = Instantiate(prefabEnemies[prefabIndex], transform.position, Quaternion.identity, enemyPool);
+        Instantiate(prefabEnemies[prefabIndex], transform.position, Quaternion.identity, enemyPool);
         nbSpawnedEnemies++;
         return true;
     }
@@ -69,5 +77,10 @@ public class EnemySpawner : MonoBehaviour
         nbEnemiesToSpawn = Random.Range(2,6);
         spawnTimer = 4f;
         canSpawn = true;
+    }
+
+    public void SpawnBoss() {
+        Instantiate(prefabBoss, transform.position, Quaternion.identity, enemyPool);
+        canSpawn = false;
     }
 }

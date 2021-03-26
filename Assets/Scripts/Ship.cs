@@ -32,7 +32,7 @@ public abstract class Ship : MonoBehaviour {
     }
     protected bool _isAlive = true;
 
-    private void Awake() {
+    protected virtual void Awake() {
         animExplosion = GetComponent<Animator>();
         //animShoot = transform.GetChild(1).GetComponent<Animator>();
         srModel = transform.GetChild(0).GetComponent<SpriteRenderer>();

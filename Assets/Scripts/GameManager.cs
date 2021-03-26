@@ -14,9 +14,12 @@ public class GameManager : MonoBehaviour {
     [HideInInspector] public GameObject poolMissile;
     public int life = 0;
     public int score = 0;
-    bool gamePlaying = false;
+
     [SerializeField] int lifeUpScore;
+    [SerializeField] int bossSpawnPalier;
+    [SerializeField] EnemySpawner spawner;
     int lifeUpPalier;
+    bool gamePlaying = false;
 
     private void Start() {
         if (Instance == null) {
@@ -54,6 +57,9 @@ public class GameManager : MonoBehaviour {
                 AddLife(-10);
             }
         }
+        if (score >= bossSpawnPalier && !spawner.spawnBossNext) {
+            spawner.spawnBossNext = true;
+        }
     }
 
     void TogglePanelPause(bool pause)
@@ -63,6 +69,12 @@ public class GameManager : MonoBehaviour {
 
     public void LoseGame() {
         MenuManager.Instance.ShowPanelGameOver(true);
+        IsPaused = true;
+        gamePlaying = false;
+    }
+
+    public void WinGame() {
+        MenuManager.Instance.ShowPanelVictory(true);
         IsPaused = true;
         gamePlaying = false;
     }
