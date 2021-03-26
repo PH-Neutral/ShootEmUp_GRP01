@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class PlayerShip : Ship {
 
+    bool canMove = true;
+
     protected override void Move() {
+        if (!canMove) return;
+
         float inputX = Input.GetAxis("Horizontal");
         float inputY = Input.GetAxis("Vertical");
         Vector3 inputs = new Vector3(inputX, inputY);
@@ -28,6 +32,7 @@ public class PlayerShip : Ship {
         GameManager.Instance.AddLife(-1);
         if (GameManager.Instance.life < 1)
         {
+            canMove = false;
             IsAlive = false;
         }
     }
