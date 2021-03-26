@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyShip : Ship {
     [SerializeField] int hp = 1;
+
     private Vector3 deplacement = new Vector3(-1,1,0);
 
     protected override void Move() {
@@ -12,15 +13,13 @@ public class EnemyShip : Ship {
         }
         transform.Translate(deplacement * speed * Time.deltaTime);
 
-        if (transform.position.y < -screenbounds.y - objectHeight)
-        {
+        if(transform.position.y < -screenbounds.y - objectHeight) {
             deplacement = new Vector3(-1, 1, 0);
         }
 
-        if (transform.position.y > screenbounds.y + objectHeight)
-        {
+        if(transform.position.y > screenbounds.y + objectHeight) {
             deplacement = new Vector3(-1, -1, 0);
-        } 
+        }
     }
 
     protected override void Shoot() {
@@ -34,7 +33,8 @@ public class EnemyShip : Ship {
     protected override void OnHit() {
         if (--hp < 1) {
             GameManager.Instance.AddScore(10);
-            Die();
+            IsAlive = false;
+            deplacement = Vector3.zero;
         }
     }
 
@@ -42,13 +42,15 @@ public class EnemyShip : Ship {
         Vector3 newPos = transform.position;
         newPos.x = screenbounds.x + objectWidth + 4;
         transform.position = newPos;
+        IsAlive = true;
+        deplacement = new Vector3(-1, 1, 0);
     }
 
 
     void OnTriggerEnter2D(Collider2D collision) {
         if(collision.tag == tagPlayer) {
             OnHit();
-            if(collision.TryGetComponent<Missile>(out Missile missile)) {
+            if(collision.TryGetComponent(out Missile missile)) {
                 Destroy(collision.gameObject);
             }
         }
