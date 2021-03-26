@@ -13,6 +13,14 @@ public class Boss : EnemyShip {
         }
     }
 
+    protected override void OnHit() {
+        base.OnHit();
+        if(hp < 1) {
+            srModel.gameObject.SetActive(false);
+            transform.localScale = Vector3.one * 3;
+        }
+    }
+
     protected override void Die() {
         GameManager.Instance.WinGame();
         base.Die();

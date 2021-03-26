@@ -75,7 +75,7 @@ public class EnemySpawner : MonoBehaviour
         }
         nbSpawnedEnemies = 0;
         nbEnemiesToSpawn = Random.Range(2,6);
-        spawnTimer = 4f;
+        spawnTimer = 2.5f;
         canSpawn = true;
     }
 

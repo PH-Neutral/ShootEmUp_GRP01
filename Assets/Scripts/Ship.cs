@@ -26,6 +26,9 @@ public abstract class Ship : MonoBehaviour {
         set { 
             canFire = _isAlive = value;
             srModel.sprite = value ? sprite : null;
+            if(!value) {
+                srModel.gameObject.SetActive(false);
+            }
             animExplosion.SetBool("Alive", IsAlive);
             //Debug.Log("sprite: " + sr.sprite);
         }

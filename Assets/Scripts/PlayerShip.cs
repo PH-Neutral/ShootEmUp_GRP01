@@ -32,7 +32,7 @@ public class PlayerShip : Ship {
         GameManager.Instance.AddLife(-1);
         if (GameManager.Instance.life < 1)
         {
-            canMove = false;
+            canMove = canFire = false;
             IsAlive = false;
         }
     }

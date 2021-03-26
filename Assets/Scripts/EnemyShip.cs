@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyShip : Ship {
-    [SerializeField] int hp = 1;
+    [SerializeField] protected int hp = 1;
+    [SerializeField] protected int pointValue = 10;
 
     private Vector3 deplacement = new Vector3(-1,1,0);
 
@@ -13,11 +14,11 @@ public class EnemyShip : Ship {
         }
         transform.Translate(deplacement * speed * Time.deltaTime);
 
-        if(transform.position.y < -screenbounds.y - objectHeight) {
+        if(transform.position.y < -screenbounds.y + objectHeight) {
             deplacement = new Vector3(-1, 1, 0);
         }
 
-        if(transform.position.y > screenbounds.y + objectHeight) {
+        if(transform.position.y > screenbounds.y - objectHeight) {
             deplacement = new Vector3(-1, -1, 0);
         }
     }
@@ -32,7 +33,7 @@ public class EnemyShip : Ship {
 
     protected override void OnHit() {
         if (--hp < 1) {
-            GameManager.Instance.AddScore(10);
+            GameManager.Instance.AddScore(pointValue);
             IsAlive = false;
             deplacement = Vector3.zero;
         }
