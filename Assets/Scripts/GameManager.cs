@@ -40,8 +40,7 @@ public class GameManager : MonoBehaviour {
     void Update()
     {
         if(life <= 0) {
-            IsPaused = true;
-            MenuManager.Instance.ShowPanelGameOver(true);
+            Invoke(nameof(LoseGame), 1f);
         } else {
             if(Input.GetKeyDown(KeyCode.Escape)) {
                 IsPaused = !IsPaused;

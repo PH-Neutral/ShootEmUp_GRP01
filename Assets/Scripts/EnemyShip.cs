@@ -38,13 +38,13 @@ public class EnemyShip : Ship {
         }
     }
 
-    protected override void Die() {
+  /*  protected override void Die() {
         Vector3 newPos = transform.position;
         newPos.x = screenbounds.x + objectWidth + 4;
         transform.position = newPos;
         IsAlive = true;
         deplacement = new Vector3(-1, 1, 0);
-    }
+    } */
 
 
     void OnTriggerEnter2D(Collider2D collision) {

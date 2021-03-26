@@ -73,5 +73,6 @@ public abstract class Ship : MonoBehaviour {
     protected virtual void OnHit() {
     }
     protected virtual void Die() {
+        Destroy(gameObject);
     }
 }

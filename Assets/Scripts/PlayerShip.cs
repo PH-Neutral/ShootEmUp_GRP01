@@ -28,16 +28,15 @@ public class PlayerShip : Ship {
         GameManager.Instance.AddLife(-1);
         if (GameManager.Instance.life < 1)
         {
-            Die();
+            IsAlive = false;
         }
     }
 
-    protected override void Die()
+  /*  protected override void Die()
     {
         // play explosion
-        GameManager.Instance.LoseGame();
         Destroy(gameObject);
-    }
+    } */
 
      void OnTriggerEnter2D(Collider2D collision)
     {
