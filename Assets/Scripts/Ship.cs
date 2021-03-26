@@ -18,27 +18,30 @@ public abstract class Ship : MonoBehaviour {
     protected float objectWidth, objectHeight;
     protected Vector3 screenbounds;
     protected bool canFire = true;
-    protected Animator animator;
-    protected SpriteRenderer sr;
+    protected Animator animExplosion;//, animShoot;
+    protected SpriteRenderer srModel;
     protected Sprite sprite;
     protected bool IsAlive {
         get { return _isAlive; }
         set { 
             canFire = _isAlive = value;
-            sr.sprite = value ? sprite : null;
-            animator.SetBool("Alive", IsAlive);
+            srModel.sprite = value ? sprite : null;
+            animExplosion.SetBool("Alive", IsAlive);
             //Debug.Log("sprite: " + sr.sprite);
         }
     }
     protected bool _isAlive = true;
 
     private void Awake() {
+        animExplosion = GetComponent<Animator>();
+        //animShoot = transform.GetChild(1).GetComponent<Animator>();
+        srModel = transform.GetChild(0).GetComponent<SpriteRenderer>();
+        sprite = srModel.sprite;
+
         screenbounds = GameManager.GetScreenBounds();
-        objectWidth = GetComponentInChildren<SpriteRenderer>().bounds.extents.x;
-        objectHeight = GetComponentInChildren<SpriteRenderer>().bounds.extents.y;
-        animator = GetComponent<Animator>();
-        sr = transform.GetChild(0).GetComponent<SpriteRenderer>();
-        sprite = sr.sprite;
+        objectWidth = srModel.bounds.extents.x;
+        objectHeight = srModel.bounds.extents.y;
+
     }
 
     private void Start() {
@@ -46,7 +49,6 @@ public abstract class Ship : MonoBehaviour {
     }
 
     protected virtual void Update() {
-        Animate();
         Move();
         Shoot();
     }
@@ -54,10 +56,6 @@ public abstract class Ship : MonoBehaviour {
     protected abstract void Move();
 
     protected abstract void Shoot();
-
-    protected virtual void Animate() {
-        //animator.SetBool("Alive", IsAlive);
-    }
 
     protected void SpawnMissile() {
         Missile missile = Instantiate(prefabMissile, transform.position + shootOffset, transform.rotation);
