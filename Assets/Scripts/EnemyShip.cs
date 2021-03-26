@@ -4,12 +4,23 @@ using UnityEngine;
 
 public class EnemyShip : Ship {
     [SerializeField] int hp = 1;
+    private Vector3 deplacement = new Vector3(-1,1,0);
 
     protected override void Move() {
         if (transform.position.x < -screenbounds.x - objectWidth) {
             Die();
         }
-        transform.Translate(Vector3.left * speed * Time.deltaTime);
+        transform.Translate(deplacement * speed * Time.deltaTime);
+
+        if (transform.position.y < -screenbounds.y - objectHeight)
+        {
+            deplacement = new Vector3(-1, 1, 0);
+        }
+
+        if (transform.position.y > screenbounds.y + objectHeight)
+        {
+            deplacement = new Vector3(-1, -1, 0);
+        } 
     }
 
     protected override void Shoot() {
